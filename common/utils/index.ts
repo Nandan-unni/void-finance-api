@@ -1,0 +1,1 @@
+export { getDurationInMs } from "./time";
