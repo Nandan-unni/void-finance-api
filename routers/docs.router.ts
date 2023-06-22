@@ -1,9 +1,9 @@
 import { Router } from "express";
-import { IndexController } from "../controllers/docs.controller";
+import DocsController from "../controllers/docs.controller";
 import DocsValidator from "../validators/docs.validator";
 
-const router = Router();
+const DocsRouter = Router();
 
-router.get("/", DocsValidator.index, IndexController);
+DocsRouter.get("/", DocsValidator.index, DocsController.index);
 
-export default router;
+export default DocsRouter;

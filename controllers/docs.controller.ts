@@ -13,3 +13,9 @@ export const IndexController = (req: Request, res: Response): Response => {
     },
   });
 };
+
+const DocsController = {
+  index: IndexController,
+};
+
+export default DocsController;
