@@ -7,6 +7,7 @@ const UserSchema = new Schema({
   uid: { type: String, required: true, unique: true },
   name: { type: String, default: null },
   email: { type: String, default: null, required: true },
+  accounts: [{ type: Schema.Types.ObjectId, ref: "Account" }],
   transactions: [TransactionSchema],
 });
 

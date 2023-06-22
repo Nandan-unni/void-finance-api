@@ -32,7 +32,7 @@ const CreateTransaction = async (
 
     return res.status(200).send({
       success: true,
-      message: "Transaction added!",
+      message: "Transaction created!",
     });
   } catch (error) {
     logger.error(error, "CreateTransaction()");
@@ -97,9 +97,10 @@ const GetTransaction = async (
     });
   } catch (error) {
     logger.error(error, "GetTransaction()");
-    return res
-      .status(500)
-      .send({ success: false, message: `${error.name}: ${error.message}` });
+    return res.status(500).send({
+      success: false,
+      message: `${error.name}: ${error.message}`,
+    });
   }
 };
 
@@ -116,11 +117,12 @@ const UpdateTransaction = async (
         (tn) => tn._id?.toString() === req.params.tid
       );
     }
-    if (!transaction)
+    if (!transaction) {
       return res.status(404).send({
         success: false,
         message: "Transaction not found!",
       });
+    }
     transaction = { ...transaction.toObject(), ...data };
     const response = await User.updateOne(
       { uid: req.headers.uid, "transactions._id": req.params.tid },
@@ -139,9 +141,10 @@ const UpdateTransaction = async (
     });
   } catch (error) {
     logger.error(error, "UpdateTransaction()");
-    return res
-      .status(500)
-      .send({ success: false, message: `${error.name}: ${error.message}` });
+    return res.status(500).send({
+      success: false,
+      message: `${error.name}: ${error.message}`,
+    });
   }
 };
 
@@ -167,9 +170,10 @@ const DeleteTransaction = async (
     });
   } catch (error) {
     logger.error(error, "DeleteTransaction()");
-    return res
-      .status(500)
-      .send({ success: false, message: `${error.name}: ${error.message}` });
+    return res.status(500).send({
+      success: false,
+      message: `${error.name}: ${error.message}`,
+    });
   }
 };
 

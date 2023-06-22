@@ -4,3 +4,7 @@ export const CORS_WHITELIST: string[] = [
 ];
 
 export const TransactionModes = ["expense", "income"];
+
+export const AccountTypes = ["savings", "salary", "current", "other"];
+export const Banks = ["sbi", "fdrl", "other"];
+export const Countries = ["in", "us", "other"];
