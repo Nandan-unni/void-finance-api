@@ -3,8 +3,10 @@ export const CORS_WHITELIST: string[] = [
   "https://project.m",
 ];
 
-export const TransactionModes = ["expense", "income"];
-
+export enum TransactionModes {
+  EXPENSE = "expense",
+  INCOME = "income",
+}
 export const AccountTypes = ["savings", "salary", "current", "other"];
 export const Banks = ["sbi", "fdrl", "other"];
 export const Countries = ["in", "us", "other"];

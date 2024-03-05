@@ -1,5 +1,4 @@
 import { NextFunction, Request, Response } from "express";
-import jwt from "jsonwebtoken";
 import { OPEN_END_POINTS } from "../routers/routes";
 import { jwtAuth } from "../common/utils";
 
@@ -8,6 +7,7 @@ const authMiddleware = (
   res: Response,
   next: NextFunction
 ): void | Response => {
+  // return next();
   if (OPEN_END_POINTS.includes(req.url)) return next();
 
   const authHeader = req.headers.authorization;
@@ -31,6 +31,7 @@ const authMiddleware = (
   const token = authHeader.split(" ")[1];
   const data: any = jwtAuth.decode(token);
   req.headers["uid"] = data["uid"];
+  console.log(data["uid"], "08Su62OoH7U1rNfOxrRql5Rd8cMa");
   return next();
 };
 

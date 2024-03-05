@@ -6,10 +6,10 @@ const corsMiddleware = cors({
     requestOrigin: string | undefined,
     callback: (err: Error | null, allow?: boolean) => void
   ): void => {
-    if (requestOrigin && CORS_WHITELIST.indexOf(requestOrigin) === -1) {
-      const message: string = `CORS ERROR: Access denied for ${requestOrigin}`;
-      return callback(new Error(message), false);
-    }
+    // if (requestOrigin && CORS_WHITELIST.indexOf(requestOrigin) === -1) {
+    //   const message: string = `CORS ERROR: Access denied for ${requestOrigin}`;
+    //   return callback(new Error(message), false);
+    // }
     return callback(null, true);
   },
   credentials: true,

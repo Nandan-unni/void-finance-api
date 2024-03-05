@@ -13,12 +13,12 @@ const CreateTransactionValidator = (
       amount: Joi.number().required().min(1),
       mode: Joi.string()
         .required()
-        .valid(...TransactionModes),
+        .valid(...Object.values(TransactionModes)),
       label: Joi.string().required(),
-      desc: Joi.string(),
+      desc: Joi.string().min(0),
       timestamp: Joi.number().required(),
       category: Joi.string(),
-      subCategory: Joi.string(),
+      subCategory: Joi.string().min(0),
     }),
   });
 };

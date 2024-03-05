@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { logger } from "../common/utils";
 import User from "../database/user.model";
+import { calculateSheet } from "../common/utils/sheet";
 
 const CreateTransaction = async (
   req: Request,
@@ -55,10 +56,17 @@ const ListTransactions = async (
         message: "User not found!",
       });
     }
+
+    const sheet = calculateSheet(user.transactions);
     return res.status(200).send({
       success: true,
       message: "Transactions found!",
-      data: user.transactions,
+      data: {
+        transactions: user.transactions.sort(
+          (a, b) => b.timestamp - a.timestamp
+        ),
+        sheet,
+      },
     });
   } catch (error) {
     logger.error(error, "ListTransactions()");

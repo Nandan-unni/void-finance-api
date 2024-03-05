@@ -5,7 +5,7 @@ export const logger = {
     console.log(`\n🟢 log-data ${location(loc)}\n${JSON.stringify(data)}`),
 
   error: (error: Error, loc?: string) =>
-    console.log(`\n🔴 log-error ${location(loc)}\n${error}`),
+    console.log(`\n🔴 log-error ${location(loc)}\n`, error),
 
   info: (info: string, loc?: string) =>
     console.log(`\n🔵 log-info ${location(loc)}${info}`),

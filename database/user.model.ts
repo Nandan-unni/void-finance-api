@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose, { Types } from "mongoose";
 import { TransactionSchema } from "./transaction.model";
 
 const { Schema } = mongoose;
