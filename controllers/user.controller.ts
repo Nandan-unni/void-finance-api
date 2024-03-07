@@ -21,9 +21,8 @@ const AuthenticateUser = async (
       success: true,
       message: "User authenticated!",
       data: {
-        accessToken: jwtAuth.encode({ uid: user.uid }),
+        accessToken: jwtAuth.encode({ uid: user.id }),
         isNewUser: isNewUser,
-        transactions: user.transactions,
       },
     });
   } catch (error) {

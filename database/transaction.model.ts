@@ -1,9 +1,18 @@
-import mongoose from "mongoose";
+import mongoose, { Document } from "mongoose";
 import { TransactionModes } from "../common/constants";
 
 const { Schema } = mongoose;
 
-const TransactionSchema = new Schema({
+interface Transaction extends Document {
+  amount: number;
+  mode: TransactionModes;
+  label: string;
+  desc: string;
+  timestamp: number;
+  category: string;
+  subCategory: string;
+}
+const TransactionSchema = new Schema<Transaction>({
   amount: { type: Number, required: true },
   mode: { type: String, enum: TransactionModes, required: true },
   label: { type: String, required: true },
@@ -15,5 +24,5 @@ const TransactionSchema = new Schema({
 
 // let Transaction = mongoose.model("Transaction", TransactionSchema);
 
-export { TransactionSchema };
+export { TransactionSchema, Transaction };
 // export default Transaction;

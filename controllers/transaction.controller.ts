@@ -20,7 +20,7 @@ const CreateTransaction = async (
     };
 
     const user = await User.findOneAndUpdate(
-      { uid: req.headers.uid },
+      { _id: req.headers.uid },
       { $push: { transactions: newTransaction } },
       { new: true }
     );
@@ -49,7 +49,7 @@ const ListTransactions = async (
   res: Response
 ): Promise<Response> => {
   try {
-    const user = await User.findOne({ uid: req.headers.uid });
+    const user = await User.findOne({ _id: req.headers.uid });
     if (!user) {
       return res.status(404).send({
         success: false,
@@ -82,7 +82,7 @@ const GetTransaction = async (
   res: Response
 ): Promise<Response> => {
   try {
-    const user = await User.findOne({ uid: req.headers.uid });
+    const user = await User.findOne({ _id: req.headers.uid });
     if (!user) {
       return res.status(404).send({
         success: false,
@@ -118,7 +118,7 @@ const UpdateTransaction = async (
 ): Promise<Response> => {
   try {
     const data = req.body;
-    const user = await User.findOne({ uid: req.headers.uid });
+    const user = await User.findOne({ _id: req.headers.uid });
     let transaction = null;
     if (user) {
       transaction = user?.transactions.find(
@@ -133,7 +133,7 @@ const UpdateTransaction = async (
     }
     transaction = { ...transaction.toObject(), ...data };
     const response = await User.updateOne(
-      { uid: req.headers.uid, "transactions._id": req.params.tid },
+      { _id: req.headers.uid, "transactions._id": req.params.tid },
       { $set: { "transactions.$": transaction } },
       { new: true }
     );
@@ -162,7 +162,7 @@ const DeleteTransaction = async (
 ): Promise<Response> => {
   try {
     const user = await User.findOneAndUpdate(
-      { uid: req.headers.uid },
+      { _id: req.headers.uid },
       { $pull: { transactions: { _id: req.params.tid } } },
       { new: true }
     );

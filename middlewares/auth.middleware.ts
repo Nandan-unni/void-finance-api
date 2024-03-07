@@ -31,7 +31,6 @@ const authMiddleware = (
   const token = authHeader.split(" ")[1];
   const data: any = jwtAuth.decode(token);
   req.headers["uid"] = data["uid"];
-  console.log(data["uid"], "08Su62OoH7U1rNfOxrRql5Rd8cMa");
   return next();
 };
 
