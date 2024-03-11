@@ -4,6 +4,6 @@ import UserController from "../controllers/user.controller";
 
 const UserRouter = Router();
 
-UserRouter.post("/", UserValidator.authenticate, UserController.authenticate);
+UserRouter.get("/", UserValidator.get, UserController.get);
 
 export default UserRouter;

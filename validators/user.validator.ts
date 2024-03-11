@@ -2,22 +2,12 @@ import Joi from "joi";
 import { NextFunction, Request, Response } from "express";
 import { validatorMiddleware } from "../middlewares";
 
-const AuthenticateUserValidator = (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
-  return validatorMiddleware(req, res, next, {
-    bodySchema: Joi.object({
-      uid: Joi.string().required().length(28),
-      name: Joi.string().required().min(4),
-      email: Joi.string().required().email(),
-    }),
-  });
+const GetUserValidator = (req: Request, res: Response, next: NextFunction) => {
+  return validatorMiddleware(req, res, next, {});
 };
 
 const UserValidator = {
-  authenticate: AuthenticateUserValidator,
+  get: GetUserValidator,
 };
 
 export default UserValidator;

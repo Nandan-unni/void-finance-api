@@ -1,29 +1,20 @@
 import { Request, Response } from "express";
-import { jwtAuth, logger } from "../common/utils";
+import { logger } from "../common/utils";
 import User from "../database/user.model";
 
-const AuthenticateUser = async (
-  req: Request,
-  res: Response
-): Promise<Response> => {
+const GetUser = async (req: Request, res: Response): Promise<Response> => {
   try {
-    let user = await User.findOne({ uid: req.body.uid });
-    let isNewUser = false;
+    const user = await User.findOne({ _id: req.headers.uid });
+
     if (!user) {
-      isNewUser = true;
-      user = await User.create({
-        uid: req.body.uid,
-        name: req.body.name,
-        email: req.body.email,
-      });
+      return res
+        .status(404)
+        .send({ success: false, message: "User not found!" });
     }
-    return res.status(isNewUser ? 201 : 200).send({
+    return res.status(200).send({
       success: true,
-      message: "User authenticated!",
-      data: {
-        accessToken: jwtAuth.encode({ uid: user.id }),
-        isNewUser: isNewUser,
-      },
+      message: "User found!",
+      data: user,
     });
   } catch (error) {
     logger.error(error, "AuthenticateUser()");
@@ -35,7 +26,7 @@ const AuthenticateUser = async (
 };
 
 const UserController = {
-  authenticate: AuthenticateUser,
+  get: GetUser,
 };
 
 export default UserController;
